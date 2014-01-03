@@ -1,6 +1,7 @@
 FROM ubuntu:precise
 MAINTAINER Matthew Voss <voss.matthew@gmail.com>
 
+RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
 #RUN echo "deb http://ubuntu.adiscon.com/v8-devel precise/" >> /etc/apt/sources.list.d/adiscon.list && \
 #    echo "deb-src http://ubuntu.adiscon.com/v8-devel precise/" >> /etc/apt/sources.list.d/adiscon.list
 
@@ -10,7 +11,7 @@ RUN dpkg-divert --local --rename --add /sbin/initctl && \
 # Install packages
 RUN apt-get update
 RUN apt-get -y upgrade
-RUN ! DEBIAN_FRONTEND=noninteractive apt-get -y install supervisor mysql-server pwgen telnet rsyslog
+RUN apt-get -y install supervisor mysql-server pwgen rsyslog
 RUN echo "*.* @172.17.42.1:514" >> /etc/rsyslog.d/90-networking.conf
 
 # Add image configuration and scripts
@@ -27,4 +28,4 @@ ADD import_sql.sh /import_sql.sh
 RUN chmod 755 /*.sh
 
 EXPOSE 3306
-CMD ["/usr/bin/supervisord -n"]
+CMD ["/start.sh"]
