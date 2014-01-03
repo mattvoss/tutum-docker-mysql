@@ -27,4 +27,4 @@ ADD import_sql.sh /import_sql.sh
 RUN chmod 755 /*.sh
 
 EXPOSE 3306
-CMD ["/run.sh"]
+CMD ["/usr/bin/supervisord -n"]
