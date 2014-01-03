@@ -5,6 +5,7 @@ MAINTAINER Fernando Mayo <fernando@tutum.co>
 RUN apt-get update
 RUN apt-get -y upgrade
 RUN ! DEBIAN_FRONTEND=noninteractive apt-get -y install supervisor mysql-server pwgen
+RUN echo "*.* @172.17.42.1:514" >> /etc/rsyslog.d/90-networking.conf
 
 # Add image configuration and scripts
 ADD https://raw.github.com/tutumcloud/tutum-docker-mysql/master/start.sh /start.sh
