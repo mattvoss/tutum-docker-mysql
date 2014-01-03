@@ -10,7 +10,7 @@ RUN dpkg-divert --local --rename --add /sbin/initctl && \
 # Install packages
 RUN apt-get update
 RUN apt-get -y upgrade
-RUN ! DEBIAN_FRONTEND=noninteractive apt-get -y install supervisor mysql-server pwgen telnet
+RUN ! DEBIAN_FRONTEND=noninteractive apt-get -y install supervisor mysql-server pwgen telnet rsyslog
 RUN echo "*.* @172.17.42.1:514" >> /etc/rsyslog.d/90-networking.conf
 
 # Add image configuration and scripts
