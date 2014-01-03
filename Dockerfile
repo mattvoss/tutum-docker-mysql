@@ -1,8 +1,8 @@
-FROM ubuntu:saucy
+FROM ubuntu:precise
 MAINTAINER Matthew Voss <voss.matthew@gmail.com>
 
-RUN echo "deb http://ubuntu.adiscon.com/v8-devel saucy/" >> /etc/apt/sources.list.d/adiscon.list && \
-    echo "deb-src http://ubuntu.adiscon.com/v8-devel saucy/" >> /etc/apt/sources.list.d/adiscon.list
+RUN echo "deb http://ubuntu.adiscon.com/v8-devel precise/" >> /etc/apt/sources.list.d/adiscon.list && \
+    echo "deb-src http://ubuntu.adiscon.com/v8-devel precise/" >> /etc/apt/sources.list.d/adiscon.list
 
 RUN dpkg-divert --local --rename --add /sbin/initctl && \
     ln -s /bin/true /sbin/initctl
