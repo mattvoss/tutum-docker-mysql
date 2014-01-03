@@ -1,8 +1,8 @@
 FROM ubuntu:precise
 MAINTAINER Matthew Voss <voss.matthew@gmail.com>
 
-RUN echo "deb http://ubuntu.adiscon.com/v8-devel precise/" >> /etc/apt/sources.list.d/adiscon.list && \
-    echo "deb-src http://ubuntu.adiscon.com/v8-devel precise/" >> /etc/apt/sources.list.d/adiscon.list
+#RUN echo "deb http://ubuntu.adiscon.com/v8-devel precise/" >> /etc/apt/sources.list.d/adiscon.list && \
+#    echo "deb-src http://ubuntu.adiscon.com/v8-devel precise/" >> /etc/apt/sources.list.d/adiscon.list
 
 RUN dpkg-divert --local --rename --add /sbin/initctl && \
     ln -s /bin/true /sbin/initctl
@@ -10,7 +10,7 @@ RUN dpkg-divert --local --rename --add /sbin/initctl && \
 # Install packages
 RUN apt-get update
 RUN apt-get -y upgrade
-RUN ! DEBIAN_FRONTEND=noninteractive apt-get -y install supervisor mysql-server pwgen rsyslog telnet
+RUN ! DEBIAN_FRONTEND=noninteractive apt-get -y install supervisor mysql-server pwgen telnet
 RUN echo "*.* @172.17.42.1:514" >> /etc/rsyslog.d/90-networking.conf
 
 # Add image configuration and scripts
